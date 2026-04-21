@@ -21,3 +21,11 @@ I implemented request validation and selective response handling. The server now
 If the request is "GET / HTTP/1.1", the server returns the main HTML page. Otherwise, it returns a 404 page. This simulates basic routing behavior found in real web frameworks.
 
 I learned that the first line of an HTTP request contains important information such as method and path. By matching this line, we can control how the server responds to different URLs.
+
+## Commit 4 Reflection Notes
+
+Here, i made a slow request by adding a sleep delay of 10 seconds for a specific route (/sleep). This shows the limitation of a single-threaded server.
+
+When I opened two browser tabs, one accessing /sleep and another accessing /, I see that the second request was delayed until the first one finished. This shows that the server processes requests sequentially, not concurrently.
+
+If multiple users send slow requests, the server becomes blocked and cannot handle new requests efficiently.
