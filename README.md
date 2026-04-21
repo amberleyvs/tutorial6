@@ -12,4 +12,4 @@ I improved the server so it can return an actual HTTP response. The server now r
 
 I learned that a web server must send a properly formatted HTTP response, including a status line (e.g., HTTP/1.1 200 OK), headers such as Content-Length, and the body (HTML content).
 
-The server reads an HTML file (hello.html) and sends it back to the browser. This makes the browser able to render the page correctly. This helped me understand the basic structure of HTTP communication between client and server.
+The server reads an HTML file (hello.html) and sends it back to the browser. This makes the browser able to render the page correctly. This helped me understand the basic structure of HTTP communication between client and server.s
