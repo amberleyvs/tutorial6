@@ -13,3 +13,11 @@ I improved the server so it can return an actual HTTP response. The server now r
 I learned that a web server must send a properly formatted HTTP response, including a status line (e.g., HTTP/1.1 200 OK), headers such as Content-Length, and the body (HTML content).
 
 The server reads an HTML file (hello.html) and sends it back to the browser. This makes the browser able to render the page correctly. This helped me understand the basic structure of HTTP communication between client and server.s
+
+## Commit 3 Reflection Notes
+
+I implemented request validation and selective response handling. The server now reads the first line of the HTTP request and matches it against known routes.
+
+If the request is "GET / HTTP/1.1", the server returns the main HTML page. Otherwise, it returns a 404 page. This simulates basic routing behavior found in real web frameworks.
+
+I learned that the first line of an HTTP request contains important information such as method and path. By matching this line, we can control how the server responds to different URLs.
