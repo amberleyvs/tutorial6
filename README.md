@@ -29,3 +29,15 @@ Here, i made a slow request by adding a sleep delay of 10 seconds for a specific
 When I opened two browser tabs, one accessing /sleep and another accessing /, I see that the second request was delayed until the first one finished. This shows that the server processes requests sequentially, not concurrently.
 
 If multiple users send slow requests, the server becomes blocked and cannot handle new requests efficiently.
+
+## Commit 5 Reflection Notes
+
+I improved the web server by introducing concurrency using a ThreadPool. Previously, the server handled requests sequentially, where each request had to wait for the previous one to finish. This caused performance issues, especially when handling slow requests such as the `/sleep` endpoint.
+
+To solve this, I implemented a ThreadPool abstraction. Instead of spawning a new thread for every incoming request, the server now creates a fixed number of worker threads at startup. These workers continuously wait for tasks and execute them as they arrive.
+
+When a new request is received, the server sends the task (a closure containing the request handler) to the ThreadPool using the `execute` method. The ThreadPool then assigns the task to one of the available worker threads. This allows multiple requests to be processed concurrently.
+
+One important concept in this implementation is the use of the `move` keyword in closures. This ensures that ownership of the `TcpStream` is transferred into the worker thread, preventing lifetime and borrowing issues when the thread outlives the main function scope.  
+
+After implementing the ThreadPool, I tested the server by accessing `/sleep` and `/` simultaneously in different browser tabs. Unlike the previous single-threaded version, the fast request (`/`) was no longer blocked by the slow request (`/sleep`), this means that concurrency is working correctly.
